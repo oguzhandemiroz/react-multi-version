@@ -1,0 +1,44 @@
+{
+  "name": "react-multi-versions",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react-scripts": "4.0.3"
+  },"scripts": {
+    "postinstall": "run-s install:*",
+    "install:older": "cd src/older && npm install",
+    "install:latest": "cd src/latest && npm install",
+    "copy:older": "cpx 'src/shared/**' 'src/older/shared/'",
+    "copy:latest": "cpx 'src/shared/**' 'src/latest/shared/'",
+    "watch:older": "cpx 'src/shared/**' 'src/older/shared/' --watch --no-initial",
+    "watch:latest": "cpx 'src/shared/**' 'src/latest/shared/' --watch --no-initial",
+    "prebuild": "run-p copy:*",
+    "prestart": "run-p copy:*",
+    "start": "run-p start-app watch:*",
+    "start-app": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+    },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "cpx": "1.5.0",
+    "npm-run-all": "4.1.5"
+    }
+}
